@@ -102,3 +102,74 @@ int listarTarefa(ListaDeTarefas lt){
     }
     return 0;
 };
+
+//A funcao apenas printa as opcoes disponiveis
+void printMenu(){
+    printf("1 - Criar Tarefa\n");
+    printf("2 - Deletar Tarefa\n");
+    printf("3 - Listar Tarefas\n");
+    printf("4 - Alterar Tarefas\n");
+    printf("5 - Filtrar Tarefas por Prioridade\n");
+    printf("6 - Filtrar Tarefas por Estado\n");
+    printf("7 - Filtrar Tarefas por Categoria\n");
+    printf("8 - Filtrar Tarefas por Prioridade e Categoria\n");
+    printf("9 - Exportar Tarefas por Prioridade\n");
+    printf("10 - Exportar Tarefas por Categoria\n");
+    printf("11 - Exportar Tarefas por Prioridade e Categoria\n");
+    printf("12 - Sair\n");
+    printf("Digite a opcao que voce quer executar: ");
+};
+
+//Essa funcao altera alguma tarefa ja existente
+int alterarTarefa(ListaDeTarefas *lt) {
+    int opcao;
+    printf("Qual tarefa deseja alterar?");
+    scanf("%d", &opcao);
+
+    if (opcao < 1 || opcao > lt->qtd) {
+        printf("Numero invalido.\n");
+        return 1;
+    }
+
+    printf("Escolha o campo que deseja alterar:\n");
+    printf("1 - Tarefa\n");
+    printf("2 - Descricao\n");
+    printf("3 - Prioridade\n");
+    printf("4 - Estado\n");
+    printf("5 - Categoria\n");
+    printf("Digite a opcao que voce quer alterar: ");
+
+    int campo;
+    scanf("%d", &campo);
+
+    // Considerando que as entradas são válidas, solicite a nova informação
+    switch (campo) {
+        case 1:
+            printf("Nova tarefa: ");
+            scanf("%s", lt->tarefas[opcao - 1].tarefa);
+            break;
+        case 2:
+            printf("Nova descricao: ");
+            scanf("%s", lt->tarefas[opcao - 1].descricao);
+            break;
+        case 3:
+            printf("Nova prioridade: ");
+            scanf("%d", &lt->tarefas[opcao - 1].prioridade);
+            break;
+        case 4:
+            printf("Novo estado: "); 
+            scanf(" %s", lt->tarefas[opcao - 1].estado);
+            break;
+        case 5:
+            printf("Nova categoria: ");
+            scanf("%s", lt->tarefas[opcao - 1].categoria);
+            break;
+        default:
+            printf("Opcao invalida.\n");
+            return 1;
+    }
+
+    printf("Tarefa %d alterada com sucesso!\n", opcao);
+    return 0;
+}
+    
